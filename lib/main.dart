@@ -115,117 +115,115 @@ class _MyHomePageState extends State<MyHomePage> {
           centerTitle: true,
         ),
         body: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                padding: const EdgeInsets.fromLTRB(2.0, 10.0, 2.0, 10.0),
-                child: Text(
-                  'I am thinking of a number between 1 and 100.',
-                  style: TextStyle(
-                    letterSpacing: 1.0,
-                    color: Colors.grey[850],
-                    fontSize: 20.0,
-                  ),
-                  textAlign: TextAlign.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              padding: const EdgeInsets.fromLTRB(2.0, 10.0, 2.0, 10.0),
+              child: Text(
+                'I am thinking of a number between 1 and 100.',
+                style: TextStyle(
+                  letterSpacing: 1.0,
+                  color: Colors.grey[850],
+                  fontSize: 20.0,
                 ),
+                textAlign: TextAlign.center,
               ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(20.0, 5.0, 20.0, 15.0),
-                child: Text(
-                  'It is your turn to guess my number!',
-                  style: TextStyle(
-                    letterSpacing: 1.0,
-                    color: Colors.grey[850],
-                    fontSize: 15.0,
-                  ),
-                  textAlign: TextAlign.center,
+            ),
+            Container(
+              padding: const EdgeInsets.fromLTRB(20.0, 5.0, 20.0, 15.0),
+              child: Text(
+                'It is your turn to guess my number!',
+                style: TextStyle(
+                  letterSpacing: 1.0,
+                  color: Colors.grey[850],
+                  fontSize: 15.0,
                 ),
+                textAlign: TextAlign.center,
               ),
-              Container(
-                child: Text(
-                  m,
-                  style: const TextStyle(
-                    letterSpacing: 1.0,
-                    color: Colors.deepPurple,
-                    fontSize: 25.0,
-                  ),
-                  textAlign: TextAlign.center,
+            ),
+            Container(
+              child: Text(
+                m,
+                style: const TextStyle(
+                  letterSpacing: 1.0,
+                  color: Colors.deepPurple,
+                  fontSize: 25.0,
                 ),
+                textAlign: TextAlign.center,
               ),
-              Container(
-                child: Text(
-                  m1,
-                  style: const TextStyle(
-                    letterSpacing: 1.0,
-                    color: Colors.deepPurple,
-                    fontSize: 25.0,
-                  ),
-                  textAlign: TextAlign.center,
+            ),
+            Container(
+              child: Text(
+                m1,
+                style: const TextStyle(
+                  letterSpacing: 1.0,
+                  color: Colors.deepPurple,
+                  fontSize: 25.0,
                 ),
+                textAlign: TextAlign.center,
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-                child: Card(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      ListTile(
-                        title: Text(
-                          'Try a number!',
-                          style: TextStyle(
-                            letterSpacing: 1.0,
-                            color: Colors.grey[850],
-                            fontSize: 30.0,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      TextFormField(
-                        controller: msgController,
-                        keyboardType: TextInputType.number,
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+              child: Card(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    ListTile(
+                      title: Text(
+                        'Try a number!',
                         style: TextStyle(
                           letterSpacing: 1.0,
                           color: Colors.grey[850],
-                          fontSize: 20.0,
+                          fontSize: 30.0,
                         ),
-                        decoration: const InputDecoration(
-                          hintText: 'Insert the number here',
-                        ),
-                        onChanged: (String value) {
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    TextFormField(
+                      controller: msgController,
+                      keyboardType: TextInputType.number,
+                      style: TextStyle(
+                        letterSpacing: 1.0,
+                        color: Colors.grey[850],
+                        fontSize: 20.0,
+                      ),
+                      decoration: const InputDecoration(
+                        hintText: 'Insert the number here',
+                      ),
+                      onChanged: (String value) {
+                        setState(() {
+                          message = value;
+                        });
+                      },
+                      validator: (String value) {
+                        if (value.contains('.') || value.contains(',') || value.contains('-') || value.contains(' ')) {
+                          return 'Please Enter an Integer!';
+                        }
+                        return null;
+                      },
+                    ),
+                    FlatButton(
+                      textTheme: ButtonTextTheme.accent,
+                      color: Colors.grey,
+                      onPressed: () {
+                        if (_formKey.currentState.validate()) {
                           setState(() {
-                            message = value;
+                            number = int.tryParse(message);
+                            Guess();
                           });
-                        },
-                        validator: (String value) {
-                          if (value.contains('.') ||
-                              value.contains(',') ||
-                              value.contains('-') ||
-                              value.contains(' ')) {
-                            return 'Please Enter an Integer!';
-                          }
-                          return null;
-                        },
-                      ),
-                      FlatButton(
-                        textTheme: ButtonTextTheme.accent,
-                        color: Colors.grey,
-                        onPressed: () {
-                          if (_formKey.currentState.validate()) {
-                            setState(() {
-                              number = int.tryParse(message);
-                              Guess();
-                            });
-                          }
-                        },
-                        child: pressOK ? const Text('RESET!') : const Text('GUESS!'),
-                      ),
-                    ],
-                  ),
+                        }
+                      },
+                      child: pressOK ? const Text('RESET!') : const Text('GUESS!'),
+                    ),
+                  ],
                 ),
               ),
-            ]),
+            ),
+          ],
+        ),
       ),
     );
   }
