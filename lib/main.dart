@@ -165,8 +165,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 20.0, vertical: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
                 child: Card(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -220,9 +219,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             });
                           }
                         },
-                        child: pressOK
-                            ? const Text('RESET!')
-                            : const Text('GUESS!'),
+                        child: pressOK ? const Text('RESET!') : const Text('GUESS!'),
                       ),
                     ],
                   ),
